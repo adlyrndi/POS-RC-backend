@@ -2,9 +2,10 @@ const supabase = require('../config/supabase');
 
 exports.signup = async (req, res) => {
     try {
-        const { email, password, name, tenant_code } = req.body;
+        const { email, password, name, business_name, tenant_code } = req.body;
+        const displayName = business_name || name;
 
-        if (!email || !password || !name || !tenant_code) {
+        if (!email || !password || !displayName || !tenant_code) {
             return res.status(400).json({ error: 'Email, password, name, and tenant_code are required' });
         }
 
@@ -25,7 +26,7 @@ exports.signup = async (req, res) => {
             .from('tenants')
             .insert([{
                 email,
-                name,
+                name: displayName,
                 tenant_code: tenant_code.toUpperCase()
             }])
             .select()
