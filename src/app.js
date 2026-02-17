@@ -27,7 +27,9 @@ app.get('/', (req, res) => {
 
 if (require.main === module) {
     app.listen(PORT, '0.0.0.0', () => {
-        console.log(`Server is running on port ${PORT}`);
+        console.log(`--- POS BACKEND ---`);
+        console.log(`Port: ${PORT}`);
+        console.log(`URL: http://localhost:${PORT}`);
     });
 }
 
